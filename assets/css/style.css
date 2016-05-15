@@ -1,0 +1,9 @@
+
+.jumbotron{
+	background-image: url(../../assets/images/train.jpg);
+	color: white;
+}
+
+.push{
+	height: 100px;
+}
