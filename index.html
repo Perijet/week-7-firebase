@@ -6,13 +6,15 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
-  <script type="text/javascript" src="assets/javascript/giphy.js"></script>
+  <script type="text/javascript" src="assets/javascript/sched.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 <body>
 <!-- Jumbotron with page heading placed outside of the container to allow full page width-->
   <div class="jumbotron text-center">
-    <h1>Anytime Train Scheduler</h1>
-    <p>Choo Choo. Chee Chee</p>
+    <h1>Global Transit Train Scheduler</h1>
+    <p>The Best way to Travel the Globe </p>
   </div>
 
   <!-- Page container encompassing all page elements except the Jumbotron and footer-->  
@@ -25,32 +27,21 @@
       </div>
 
       <!-- Table -->
-      <table class="table">
-        
-        <tr>
-        	<th>Employee Name</th>
-        	<th>Role</th>
-        	<th>Start Date</th>
-        	<th>Monthly Rate</th>
-        	<th>Months Worked</th>
-        	<th>Total Billed</th>
-        	<tr>
+      <table id="trainTable" class="table">
+        <thead>
           <tr>
-          <td>Jill Smith</td>
-          <td>Worker</td> 
-          <td>01/01/16</td>
-          <td>1000</td>
-          <td>0</td> 
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Eve</td>
-          <td>Jackson</td> 
-          <td>94</td>
-          <td>Eve</td>
-          <td>Jackson</td> 
-          <td>94</td>
-        </tr>
+          	<th><strong>Train Name</strong></th>
+          	<th><strong>Destination</strong></th>
+          	<th><strong>Frequency (mins)</strong></th>
+          	<th><strong>Next Arrival</strong></th>
+          	<th><strong>Minutes Away</strong></th>
+          <tr>
+        </thead>
+          
+        <tbody>
+          
+        </tbody>  
+
       </table>
     </div>
 
@@ -63,16 +54,16 @@
       <!-- Form input boxes -->
         <form>
     			Train Name<br>
-    			<input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+    			<input id="nameInput" type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
     			<br>
     			Destination<br>
-    			<input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+    			<input id="destinationInput" type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
     			<br>
     			First Train Time (HH:mm military time)<br>
-    			<input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+    			<input id="trainTimeInput" type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
     			<br>
     			Frequency<br>
-    			<input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+    			<input id="frequencyInput" type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
     			<br>
     			<input type="button" class="btn btn-info" value="Submit"></input>
 
