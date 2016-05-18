@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+//'use strict';
 //Firebase link
 var trainData = new Firebase('https://smoke-trails-1234.firebaseio.com/');
 
@@ -52,11 +52,11 @@ trainData.on("child_added", function(childSnapshot, prevChildKey){
 
 
 
-	var firstTimeConverted = moment(trainTime,"hh:mm").subtract(1, "years");
+	var firstTimeConverted = moment(trainTime,"H:HH").subtract(1, "years");
 		console.log(firstTimeConverted);
 		// Current Time
 	var currentTime = moment();
-		console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+		console.log("CURRENT TIME: " + moment(currentTime).format("H:HH"));
 		// Difference between the times
 	var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
 		console.log("DIFFERENCE IN TIME: " + diffTime);
@@ -68,11 +68,11 @@ trainData.on("child_added", function(childSnapshot, prevChildKey){
 		console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 		// Next Train
 	var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-		console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+		console.log("ARRIVAL TIME: " + moment(nextTrain).format("H:HH"));
 
 
 
-trainArrival = moment(nextTrain).format("hh:mm");
+trainArrival = moment(nextTrain).format("H:HH");
 
 	//var trainArrival = "10:00 PM";
 
