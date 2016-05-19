@@ -1,55 +1,61 @@
 $(document).ready(function(){
-//'use strict';
+
 //Firebase link
 var trainData = new Firebase('https://smoke-trails-1234.firebaseio.com/');
 
 $('.btn').on('click', function(){
 
+	//Input values from the form set to their respective variables
 	var trainName = $("#nameInput").val().trim();
 	var trainDestination = $("#destinationInput").val().trim();
 	var trainTime = $("#trainTimeInput").val().trim();
 	var trainFrequency = $("#frequencyInput").val().trim();
 
-var trainSched = {
-	name: trainName,
-	destination: trainDestination,
-	time: trainTime,
-	frequency: trainFrequency
+	//Object to store variable values containing the train information
+	var trainSched = {
+		name: trainName,
+		destination: trainDestination,
+		time: trainTime,
+		frequency: trainFrequency
 };
 
+	//Firebase push() method to generate a new child location in Firebase for form generated information
 	trainData.push(trainSched);
 
+	//Logging information from using the push() method
 	console.log(trainSched.name);
 	console.log(trainSched.destination);
 	console.log(trainSched.time);
 	console.log(trainSched.frequency);
 
+	//Clears the form and makes ready for additional information
 	trainName = $("#nameInput").val("");
 	trainDestination = $("#destinationInput").val("");
 	trainTime = $("#trainTimeInput").val("");
 	trainFrequency = $("#frequencyInput").val("");
 
+	//return false to disable the browsers default refresh action
 	return false;
 
 });
 
-
-
+//on() method listening for data changes
 trainData.on("child_added", function(childSnapshot, prevChildKey){
 
+	//logging data changes reported
 	console.log(childSnapshot.val());
 
+	//Assigning data change values to various variables
 	var trainName = childSnapshot.val().name;
 	var trainDestination = childSnapshot.val().destination;
 	var trainTime = childSnapshot.val().time;
 	var trainFrequency = childSnapshot.val().frequency;
 
+	//Logging content of data change variables
 	console.log(trainName);
 	console.log(trainDestination);
 	console.log(trainTime);
 	console.log(trainFrequency);
-
-
 
 
 	var firstTimeConverted = moment(trainTime,"H:HH").subtract(1, "years");
@@ -71,13 +77,13 @@ trainData.on("child_added", function(childSnapshot, prevChildKey){
 		console.log("ARRIVAL TIME: " + moment(nextTrain).format("H:HH"));
 
 
+	//Assigning moment.js format to next train time before appending to page
+	trainArrival = moment(nextTrain).format("H:HH");
 
-trainArrival = moment(nextTrain).format("H:HH");
-
-	//var trainArrival = "10:00 PM";
-
+	//Assigning the minutes till next train to variable based om moments.js conversion 
 	var minutesAway = tMinutesTillTrain;
 
+	//Appending train information to page
 	$('#trainTable > tbody').append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainFrequency + "</td><td>" + trainArrival + "</td><td>" + minutesAway + "</td><tr>");
 
 });
